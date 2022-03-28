@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Health ML model</title>
+    <style>
+        .heading{
+            background: #C4C4C4;
+            text-align: center;
+            padding: 0.1rem;
+            border-radius: 15px;
+        }
+        .heading h1{
+            text-transform: uppercase;
+        }
+        .heading{
+            text-transform: capitalize;
+        }
+        .info{
+            text-align: center;
+            padding: 1rem;
+        }
+        form{
+            background: #C4C4C4;
+            width: max-content;
+            margin: 0 auto;
+            height: max-content;
+            padding: 2rem;
+            border-radius:15px;
+        }
+        form section{
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+        }
+        .invisible{
+            display: none;
+        }
+        .visible{
+            display: grid;
+        }
+        form section label{
+            justify-self: flex-end;
+            
+        }
+        form section label::after{
+            content: ": "
+        }
+        form section button, .submit{
+            grid-column: span 2;
+            width: 50%;
+            justify-self: center;
+            background: #A93F3F;
+            border-radius:5px;
+            color:white;
+        }
+        form section *{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1><b>Heart Disease Predition</b></h1>
+        <p><b>using machine Learning</b></p>
+    </div>
+    <div class="info">Enter the Details below</div>
+    <form action="/result" method="post">
+        <section>
+            <label for="name">Name</label><input type="text" name="name" placeholder="Enter your Name"/>
+            <label for="sex">Gender</label><div><input type="radio" name="sex" value="0"/>Male<input type="radio" name="sex" value="1"/>Female</div>
+            <label for="age">Age</label><input type="number" name="age" placeholder="Enter your Age"/>
+            <button class="next">Next ></button>
+        </section>
+        <section>
+            <label for="cp">CP Type</label><input type="text" name="cp" placeholder="Enter Chest Pain Type 1/2/3/4"/>
+            <label for="trestbps">B.P</label><input type="number" name="trestbps" placeholder="Enter your B.P"/>
+            <label for="chol">Cholestrol</label><input type="number" name="chol" placeholder="Enter your Cholestrol Level"/>
+            <button class="next">Next ></button>
+        </section>
+        <section>
+            <label for="fbs">Blood Sugar</label><input type="text" name="fbs" placeholder="0 for <=120, 1 for >120"/>
+            <label for="restecg">E.C.G</label><input type="number" name="restecg" placeholder="Enter the ECG parameters 0/1/2"/>
+            <label for="thalach">Max. Heart Rate</label><input type="number" name="thalach" placeholder="Enter your maximum heart rate"/>
+            <label for="ca">Flouroscopy</label><input type="number" name="ca" placeholder="No. of major vessels (0-3) colored by flourosopy"/>
+            <button class="next">Next ></button>
+        </section>
+        <section>
+            <label for="exang">E.I.A.</label><div><input type="radio" name="exang" value="0"/>Yes<input type="radio" name="exang" value="1"/>No</div>
+            <label for="oldpeak">Old Peak</label><input type="number" step="0.1" name="oldpeak" placeholder="ST depression induced by exercise relative to rest"/>
+            <label for="thal">Thal.</label><div><input type="radio" name="thal"  value="0"/>Normal<input type="radio" name="thal" value="1"/>Fixed<input type="radio" name="thal" value="2"/>Reversible</div>
+            <label for="slope">Slope</label><div><input type="radio" name="slope" value="0"/>0<input type="radio" name="slope" value="1"/>1<input type="radio" name="slope" value="2">2</div>
+            <input type="submit" class="submit" value="Next >">
+        </section>
+    </form>
+    <script>
+        let sections = document.querySelectorAll('section');
+        for(let section of [...sections].slice(1)){
+            section.classList.add('invisible')
+        }
+        let nexts = document.querySelectorAll('.next');
+        for(let i=0;i<nexts.length;i++){
+            console.log(nexts[i]);
+            nexts[i].addEventListener('click',(e)=>{
+                e.preventDefault()
+                sections[i].classList.remove('visible');
+                sections[i].classList.add('invisible');
+                sections[i+1].classList.remove('invisible');
+                sections[i+1].classList.add('visible')
+            })
+        }
+    </script>
+</body>
+</html>
