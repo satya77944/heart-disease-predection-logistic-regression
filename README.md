@@ -1,1 +1,2 @@
-# heart-disease-presection-logistic-regression
+
+# heart-disease-predection-logistic-regression
